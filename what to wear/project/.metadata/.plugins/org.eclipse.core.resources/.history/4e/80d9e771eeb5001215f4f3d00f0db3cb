@@ -1,0 +1,33 @@
+package com.neowizards.mawardrobe;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
+
+public class MainActivity extends FragmentActivity {
+	private static final int SPLASH = 0;
+	private static final int SELECTION = 1;
+	private static final int FRAGMENT_COUNT = SELECTION +1;
+
+	private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		FragmentManager fm = getSupportFragmentManager();
+	    fragments[SPLASH] = fm.findFragmentById(R.id.splashFragment);
+	    fragments[SELECTION] = fm.findFragmentById(R.id.selectionFragment);
+
+	    FragmentTransaction transaction = fm.beginTransaction();
+	    for(int i = 0; i < fragments.length; i++) {
+	        transaction.hide(fragments[i]);
+	    }
+	    transaction.commit();
+
+	}
+}
